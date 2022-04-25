@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
     private static readonly int IsPunch = Animator.StringToHash("isPunch");
     private static readonly int IsIdle = Animator.StringToHash("isIdle");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
+    private static readonly int IsSneak = Animator.StringToHash("isSneak");
 
 
     private void Awake()
@@ -53,6 +54,7 @@ public class Movement : MonoBehaviour
         _animator = gameObject.GetComponentInChildren<Animator>();
         controller = gameObject.GetComponent<CharacterController>();
     }
+    
     public void Update()
     {
         IdleAnimation();
@@ -80,20 +82,21 @@ public class Movement : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             playerVelocity.y += gravityValue * Time.deltaTime;
             Vector3 targetJump = transform.position + playerVelocity * Time.deltaTime;
-            if (_controls.Player.Punch.IsPressed())
-            {
-                _animator.SetBool(IsFalling, true);
-            }
-            else
-            {
-                _animator.SetBool(IsFalling, false);
-            }
             Move(targetJump);
 
         }
         else
         {
             _animator.SetBool(IsJumping, false);
+        }
+
+        if (_controls.Player.Sneak.IsPressed())
+        {
+            _animator.SetBool(IsSneak, true);
+        }
+        else
+        {
+            _animator.SetBool(IsSneak, false);
         }
 
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
@@ -139,20 +142,23 @@ public class Movement : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             playerVelocity.y += gravityValue * Time.deltaTime;
             Vector3 targetJump = transform.position + playerVelocity * Time.deltaTime;
-            if (_controls.Player.Punch.IsPressed())
-            {
-                _animator.SetBool(IsFalling, true);
-            }
-            else
-            {
-                _animator.SetBool(IsFalling, false);
-            }
             MovePhysics(targetJump);
 
         }
         else
         {
             _animator.SetBool(IsJumping, false);
+        }
+
+        if (_controls.Player.Sneak.IsPressed())
+        {
+            _animator.SetBool(IsSneak, true);
+            Debug.Log("Masuk sneak");
+        }
+        else
+        {
+            _animator.SetBool(IsSneak, false);
+            Debug.Log("Gak Masuk sneak");
         }
 
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
