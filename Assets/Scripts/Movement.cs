@@ -21,6 +21,8 @@ public class Movement : MonoBehaviour
     private Animator _animator;
     private CharacterController controller;
     private float whenIdle;
+    private float timer;
+    private float jumpCooldown = 0.1f;
     private static readonly int IsWalking = Animator.StringToHash("isWalking");
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
@@ -75,6 +77,9 @@ public class Movement : MonoBehaviour
         else
             _animator.SetBool(IsWalking, false);
 
+        timer += Time.deltaTime;
+        if (timer < jumpCooldown) return;
+        
         if (_controls.Player.Jump.IsPressed())
         {
             whenIdle = 0f;
@@ -83,7 +88,7 @@ public class Movement : MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
             Vector3 targetJump = transform.position + playerVelocity * Time.deltaTime;
             Move(targetJump);
-
+            timer = 0f;
         }
         else
         {
@@ -143,7 +148,6 @@ public class Movement : MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
             Vector3 targetJump = transform.position + playerVelocity * Time.deltaTime;
             MovePhysics(targetJump);
-
         }
         else
         {
@@ -165,7 +169,7 @@ public class Movement : MonoBehaviour
         {
             _animator.SetBool(IsRunning, true);
             // ShakingCamera.Instance.ShakeCamera(1.4f);
-            Vector3 target = HandleInput(input, playerSpeed + 5f);
+            Vector3 target = HandleInput(input, playerSpeed + 3f);
             MovePhysics(target);
         }
         else
@@ -232,5 +236,13 @@ public class Movement : MonoBehaviour
     private void MovePhysics(Vector3 target)
     {
         transform.position = target;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            _animator.SetBool(IsJumping, false);
+        }
     }
 }
