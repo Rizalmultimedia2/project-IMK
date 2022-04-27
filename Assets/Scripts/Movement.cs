@@ -107,14 +107,12 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
         {
             _animator.SetBool(IsRunning, true);
-            // ShakingCamera.Instance.ShakeCamera(1.4f);
             Vector3 target = HandleInput(input, playerSpeed + 5f);
             MovePhysics(target);
         }
         else
         {
             _animator.SetBool(IsRunning, false);
-            // ShakingCamera.Instance.ShakeCamera(0f);
         }
         playerVelocity.y = 0;
 
@@ -168,14 +166,12 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
         {
             _animator.SetBool(IsRunning, true);
-            // ShakingCamera.Instance.ShakeCamera(1.4f);
             Vector3 target = HandleInput(input, playerSpeed + 3f);
             MovePhysics(target);
         }
         else
         {
             _animator.SetBool(IsRunning, false);
-            // ShakingCamera.Instance.ShakeCamera(0f);
         }
 
         if (_controls.Player.Punch.IsPressed())
