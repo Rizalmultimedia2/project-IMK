@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickUpAble : MonoBehaviour
 {
+    private Renderer renderer;
     public float pickUpRange = 5;
     public float moveForce = 150;
     private GameObject heldObject;
@@ -27,14 +28,28 @@ public class PickUpAble : MonoBehaviour
         _controls.Disable();
     }
 
+    private void Start()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (Vector3.Distance(player.transform.position, this.transform.position) < 1.2f && holdParent.transform.childCount == 0)
+        {
+            renderer.material.color = new Color32(56, 158, 39, 255);
+        }
+        else
+        {
+            renderer.material.color = new Color32(71, 218, 47, 255);
+        }
+
         if (_controls.Player.PickUp.triggered)
         {
-            if (heldObject == null)
+            if (holdParent.transform.childCount == 0)
             {
-                if (Vector3.Distance(player.transform.position, this.transform.position) < 1.5f)
+                if (Vector3.Distance(player.transform.position, this.transform.position) < 1.2f)
                 {
                     PickupObject(this.transform.gameObject);
                     Debug.Log("GRAB");
@@ -89,5 +104,12 @@ public class PickUpAble : MonoBehaviour
             heldObject = null;
         }
 
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is PickUpAble able &&
+               base.Equals(obj) &&
+               EqualityComparer<Renderer>.Default.Equals(renderer, able.renderer);
     }
 }
