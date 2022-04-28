@@ -137,7 +137,7 @@ public class Movement : MonoBehaviour
         else
             _animator.SetBool(IsWalking, false);
 
-        if (_controls.Player.Jump.IsPressed())
+        if (_controls.Player.Jump.IsPressed() && !_animator.GetBool(IsSneak))
         {
             _animator.SetBool(IsJumping, true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -175,7 +175,7 @@ public class Movement : MonoBehaviour
             Debug.Log("masuk press");
         }
 
-        if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
+        if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed() && !_animator.GetBool(IsSneak))
         {
             _animator.SetBool(IsRunning, true);
             Vector3 target = HandleInput(input, playerSpeed + 3f);
