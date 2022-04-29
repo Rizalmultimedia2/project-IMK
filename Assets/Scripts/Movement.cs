@@ -135,7 +135,9 @@ public class Movement : MonoBehaviour
             MovePhysics(target);
         }
         else
+        {
             _animator.SetBool(IsWalking, false);
+        }
 
         if (_controls.Player.Jump.IsPressed() && !_animator.GetBool(IsSneak))
         {
@@ -203,11 +205,11 @@ public class Movement : MonoBehaviour
 
         Vector3 direction = right * input.x + forward * input.y;
 
-        if (direction != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
+        // if (direction != Vector3.zero)
+        // {
+        //     Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+        //     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        // }
 
         return transform.position + direction * speed * Time.deltaTime;
     }
