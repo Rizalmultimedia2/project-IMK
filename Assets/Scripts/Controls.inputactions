@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "New action",
+                    "name": "PickUp",
                     "type": "Button",
                     "id": "c9b2a4f5-69ff-476d-a926-2229742cfed5",
                     "expectedControlType": "Button",
@@ -192,11 +192,11 @@
                 {
                     "name": "",
                     "id": "7c7c5e7b-f829-474b-a677-5463d8e827eb",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "PickUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

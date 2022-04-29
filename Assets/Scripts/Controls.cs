@@ -64,7 +64,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""PickUp"",
                     ""type"": ""Button"",
                     ""id"": ""c9b2a4f5-69ff-476d-a926-2229742cfed5"",
                     ""expectedControlType"": ""Button"",
@@ -214,11 +214,11 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7c7c5e7b-f829-474b-a677-5463d8e827eb"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""PickUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -277,7 +277,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Running = m_Player.FindAction("Running", throwIfNotFound: true);
-        m_Player_Newaction = m_Player.FindAction("New action", throwIfNotFound: true);
+        m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
         m_Player_Punch = m_Player.FindAction("Punch", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
@@ -344,7 +344,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Running;
-    private readonly InputAction m_Player_Newaction;
+    private readonly InputAction m_Player_PickUp;
     private readonly InputAction m_Player_Punch;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Sneak;
@@ -356,7 +356,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Running => m_Wrapper.m_Player_Running;
-        public InputAction @Newaction => m_Wrapper.m_Player_Newaction;
+        public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputAction @Punch => m_Wrapper.m_Player_Punch;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Sneak => m_Wrapper.m_Player_Sneak;
@@ -381,9 +381,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Running.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRunning;
                 @Running.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRunning;
                 @Running.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRunning;
-                @Newaction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
+                @PickUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
+                @PickUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
+                @PickUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
                 @Punch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPunch;
                 @Punch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPunch;
                 @Punch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPunch;
@@ -409,9 +409,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Running.started += instance.OnRunning;
                 @Running.performed += instance.OnRunning;
                 @Running.canceled += instance.OnRunning;
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @PickUp.started += instance.OnPickUp;
+                @PickUp.performed += instance.OnPickUp;
+                @PickUp.canceled += instance.OnPickUp;
                 @Punch.started += instance.OnPunch;
                 @Punch.performed += instance.OnPunch;
                 @Punch.canceled += instance.OnPunch;
@@ -431,7 +431,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRunning(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
         void OnPunch(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
