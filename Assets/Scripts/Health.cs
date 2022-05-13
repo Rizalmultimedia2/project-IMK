@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
     public int health;
+    public GameObject character;
+    public GameObject indicator;
 
     public Image[] hearts;
     public Sprite fullHeart;
@@ -27,12 +29,27 @@ public class Health : MonoBehaviour
 
         if (health == 0)
         {
-            Debug.Log("Gameover");
+            SceneManager.LoadScene("Lose");
         }
     }
 
     public void minusHealth()
     {
         health -= 1;
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Enemy")
+        {
+            minusHealth();
+            indicator.SetActive(true);
+            Invoke("turnOfIndicator", 2);
+        }
+    }
+
+    private void turnOfIndicator()
+    {
+        indicator.SetActive(false);
     }
 }
