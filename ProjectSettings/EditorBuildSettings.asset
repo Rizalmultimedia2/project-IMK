@@ -12,6 +12,27 @@ EditorBuildSettings:
     path: Assets/Scenes/TentangKami.unity
     guid: 498e10405de9be04d9db0b1e89deeb06
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 876c0cc03e436ce42acf31d5e93af034
+  - enabled: 1
+    path: Assets/Scenes/Kesulitan.unity
+    guid: 8be753e655998ca46a6ade2ee190e002
+  - enabled: 1
+    path: Assets/Scenes/Misi.unity
+    guid: 9461ba7d60c1df1458a629263db4227d
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: d985112cb44c89546aa44c10d3b8880c
+<<<<<<< Updated upstream
+=======
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: 5c127cad52c82a441a38458afa56460c
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: 74556b3f246d4c44fb9091e32fd66f6d
+  - enabled: 1
+    path: Assets/Scenes/FinishGame.unity
+    guid: 34d1a4fbceca94f40b4168930f9a8ce9
+>>>>>>> Stashed changes
   m_configObjects: {}
