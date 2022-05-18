@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 10f;
+    [SerializeField] private float playerSpeed = 14f;
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private bool usePhysics = true;
@@ -108,7 +108,7 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
         {
             _animator.SetBool(IsRunning, true);
-            Vector3 target = HandleInput(input, playerSpeed + 5f);
+            Vector3 target = HandleInput(input, playerSpeed + 2f);
             MovePhysics(target);
         }
         else
@@ -180,7 +180,7 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed() && !_animator.GetBool(IsSneak))
         {
             _animator.SetBool(IsRunning, true);
-            Vector3 target = HandleInput(input, playerSpeed + 3f);
+            Vector3 target = HandleInput(input, playerSpeed + 2f);
             MovePhysics(target);
         }
         else
