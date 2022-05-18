@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = PlayerPrefs.GetFloat("bearSpeed");
     }
 
     private void Patroling()

@@ -8,6 +8,7 @@ public class PauseUI : MonoBehaviour
     // Start is called before the first frame update
     private Controls _controls;
     public GameObject PauseMenu; 
+    public GameObject ControlMenu; 
     public bool isPaused;
 
 	private void Awake()
@@ -46,6 +47,13 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(menuScene);
     }
+    public void CloseControl(string menuScene)
+    {
+        Time.timeScale = 1f;
+        ControlMenu.SetActive(false);
+    }
+
+
 
 	public void Update(){
 		if(_controls.Player.Pause.IsPressed()){
