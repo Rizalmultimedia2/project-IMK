@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinishGame.unity
     guid: 34d1a4fbceca94f40b4168930f9a8ce9
+  - enabled: 1
+    path: Assets/Scenes/CombineScene.unity
+    guid: 2b646503b5b1a14489037aef436cb23c
   m_configObjects: {}

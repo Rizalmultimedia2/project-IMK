@@ -180,7 +180,7 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed() && !_animator.GetBool(IsSneak))
         {
             _animator.SetBool(IsRunning, true);
-            Vector3 target = HandleInput(input, playerSpeed + 2f);
+            Vector3 target = HandleInput(input, playerSpeed + 1f);
             MovePhysics(target);
         }
         else

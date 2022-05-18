@@ -6,7 +6,27 @@ ModelImporter:
   - first:
       74: 4781951162920444690
     second: Armature|ArmatureAction
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hidung
+    second: {fileID: 2100000, guid: ff957ee5c88810f4c99dcc2d462a3ed8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kulit
+    second: {fileID: 2100000, guid: 0f24b3c323d8b414ea459cd4303625b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mata
+    second: {fileID: 2100000, guid: ed9fdd233d01bef41a07983092901522, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Telapak
+    second: {fileID: 2100000, guid: 43bf1c17f97c6c145b7434c8978ae31d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
