@@ -25,6 +25,7 @@ public class Stopwatch : MonoBehaviour
             currentTime = currentTime + Time.deltaTime;
         }
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
+        PlayerPrefs.SetString("Time", time.ToString(@"mm\:ss"));
         currentTimeText.text = time.ToString(@"mm\:ss");
     }
 

@@ -15,6 +15,7 @@ public class ControlUI : MonoBehaviour
         _controls = new Controls();
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
+        Debug.Log(PlayerPrefs.GetFloat("bearSpeed"));
     }
 
     private void OnEnable()
