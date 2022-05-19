@@ -1575,8 +1575,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mulai
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2671a60c1f917ed4b8f80ccce8a5741a, type: 2}
+  m_sharedMaterial: {fileID: -4024992521803261184, guid: 2671a60c1f917ed4b8f80ccce8a5741a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
