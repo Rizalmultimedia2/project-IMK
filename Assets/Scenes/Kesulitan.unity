@@ -1316,8 +1316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a258f29e9122649468e3a38addc5e9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBear: 1
-  mainScene: NewUI
+  mainScene: CombineScene
 --- !u!4 &1621354941
 Transform:
   m_ObjectHideFlags: 0

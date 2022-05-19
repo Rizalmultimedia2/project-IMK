@@ -13,6 +13,11 @@ public class Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    private void Start()
+    {
+        PlayerPrefs.SetInt("health", health);
+    }
+
     void Update()
     {
         for (int i = 0; i < hearts.Length; i++)
@@ -36,6 +41,7 @@ public class Health : MonoBehaviour
     public void minusHealth()
     {
         health -= 1;
+        PlayerPrefs.SetInt("health", health);
     }
 
     private void OnCollisionEnter(Collision col)
