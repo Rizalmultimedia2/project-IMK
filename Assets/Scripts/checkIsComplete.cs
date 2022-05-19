@@ -81,6 +81,10 @@ public class checkIsComplete : MonoBehaviour
                 }
             default:
                 {
+                    if (jawaPuzzle.transform.childCount > 0 && sumatraPuzzle.transform.childCount > 0 && kalimantanPuzzle.transform.childCount > 0 && papuaPuzzle.transform.childCount > 0)
+                    {
+                        SceneManager.LoadScene(finishScene);
+                    }
                     break;
                 }
         }
