@@ -14,6 +14,7 @@ public class Stopwatch : MonoBehaviour
     void Start()
     {
         currentTime = 0;
+        PlayerPrefs.SetFloat("count", 0);
         StartStopwatch();
     }
 
@@ -23,8 +24,10 @@ public class Stopwatch : MonoBehaviour
         if (stopwatchActive == true)
         {
             currentTime = currentTime + Time.deltaTime;
+            PlayerPrefs.SetFloat("count", PlayerPrefs.GetFloat("count") + Time.deltaTime);
         }
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
+        PlayerPrefs.SetString("Time", time.ToString(@"mm\:ss"));
         currentTimeText.text = time.ToString(@"mm\:ss");
     }
 
