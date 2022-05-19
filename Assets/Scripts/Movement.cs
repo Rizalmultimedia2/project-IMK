@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 10f;
+    [SerializeField] private float playerSpeed = 14f;
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private bool usePhysics = true;
@@ -20,7 +20,8 @@ public class Movement : MonoBehaviour
     private Vector3 playerVelocity;
     private Animator _animator;
     private CharacterController controller;
-    private float whenIdle;
+    GameObject face;
+    private Vector3 position;
     private float timer;
     private float jumpCooldown = 0.1f;
     private static readonly int IsWalking = Animator.StringToHash("isWalking");
@@ -51,15 +52,16 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        face = GameObject.Find("face");
+        position = face.transform.position;
         _mainCamera = Camera.main;
         _rb = gameObject.GetComponent<Rigidbody>();
         _animator = gameObject.GetComponentInChildren<Animator>();
         controller = gameObject.GetComponent<CharacterController>();
     }
-    
+
     public void Update()
     {
-        IdleAnimation();
         if (usePhysics)
         {
             return;
@@ -69,7 +71,6 @@ public class Movement : MonoBehaviour
 
         if (_controls.Player.Move.IsPressed())
         {
-            whenIdle = 0f;
             _animator.SetBool(IsWalking, true);
             Vector3 target = HandleInput(input, playerSpeed);
             Move(target);
@@ -79,10 +80,9 @@ public class Movement : MonoBehaviour
 
         timer += Time.deltaTime;
         if (timer < jumpCooldown) return;
-        
+
         if (_controls.Player.Jump.IsPressed())
         {
-            whenIdle = 0f;
             _animator.SetBool(IsJumping, true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             playerVelocity.y += gravityValue * Time.deltaTime;
@@ -98,6 +98,7 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Sneak.IsPressed())
         {
             _animator.SetBool(IsSneak, true);
+
         }
         else
         {
@@ -107,14 +108,12 @@ public class Movement : MonoBehaviour
         if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
         {
             _animator.SetBool(IsRunning, true);
-            // ShakingCamera.Instance.ShakeCamera(1.4f);
-            Vector3 target = HandleInput(input, playerSpeed + 5f);
+            Vector3 target = HandleInput(input, playerSpeed + 2f);
             MovePhysics(target);
         }
         else
         {
             _animator.SetBool(IsRunning, false);
-            // ShakingCamera.Instance.ShakeCamera(0f);
         }
         playerVelocity.y = 0;
 
@@ -122,7 +121,6 @@ public class Movement : MonoBehaviour
 
     public void FixedUpdate()
     {
-        IdleAnimation();
         if (!usePhysics)
         {
             return;
@@ -132,17 +130,17 @@ public class Movement : MonoBehaviour
 
         if (_controls.Player.Move.IsPressed())
         {
-            whenIdle = 0f;
             _animator.SetBool(IsWalking, true);
             Vector3 target = HandleInput(input, playerSpeed);
             MovePhysics(target);
         }
         else
-            _animator.SetBool(IsWalking, false);
-
-        if (_controls.Player.Jump.IsPressed())
         {
-            whenIdle = 0f;
+            _animator.SetBool(IsWalking, false);
+        }
+
+        if (_controls.Player.Jump.IsPressed() && !_animator.GetBool(IsSneak))
+        {
             _animator.SetBool(IsJumping, true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             playerVelocity.y += gravityValue * Time.deltaTime;
@@ -154,55 +152,44 @@ public class Movement : MonoBehaviour
             _animator.SetBool(IsJumping, false);
         }
 
-        if (_controls.Player.Sneak.IsPressed())
+        if (_controls.Player.Sneak.triggered)
         {
-            _animator.SetBool(IsSneak, true);
-            Debug.Log("Masuk sneak");
-        }
-        else
-        {
-            _animator.SetBool(IsSneak, false);
-            Debug.Log("Gak Masuk sneak");
+            if (_animator.GetBool(IsSneak))
+            {
+                _animator.SetBool(IsSneak, false);
+                Vector3 jongkok;
+                jongkok.z = 0;
+                jongkok.x = 0;
+                jongkok.y = -0.6f;
+                Vector3 targetJongkok = face.transform.position - jongkok;
+                face.transform.position = targetJongkok;
+            }
+            else
+            {
+                _animator.SetBool(IsSneak, true);
+                Vector3 jongkok;
+                jongkok.z = 0;
+                jongkok.x = 0;
+                jongkok.y = 0.6f;
+                Vector3 targetJongkok = face.transform.position - jongkok;
+                face.transform.position = targetJongkok;
+            }
+            Debug.Log("masuk press");
         }
 
-        if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed())
+        if (_controls.Player.Running.IsPressed() && _controls.Player.Move.IsPressed() && !_animator.GetBool(IsSneak))
         {
             _animator.SetBool(IsRunning, true);
-            // ShakingCamera.Instance.ShakeCamera(1.4f);
-            Vector3 target = HandleInput(input, playerSpeed + 3f);
+            Vector3 target = HandleInput(input, playerSpeed + 1f);
             MovePhysics(target);
         }
         else
         {
             _animator.SetBool(IsRunning, false);
-            // ShakingCamera.Instance.ShakeCamera(0f);
         }
 
-        if (_controls.Player.Punch.IsPressed())
-        {
-            _animator.SetBool(IsPunch, true);
-        }
-        else
-        {
-            _animator.SetBool(IsPunch, false);
-        }
         playerVelocity.y = 0;
 
-    }
-
-
-
-    private void IdleAnimation()
-    {
-        whenIdle += Time.deltaTime;
-        if (whenIdle >= 16f && !_controls.Player.Jump.IsPressed() && !_controls.Player.Move.IsPressed())
-        {
-            _animator.SetBool(IsIdle, true);
-        }
-        else
-        {
-            _animator.SetBool(IsIdle, false);
-        }
     }
 
     private Vector3 HandleInput(Vector2 input, float speed)
@@ -218,11 +205,11 @@ public class Movement : MonoBehaviour
 
         Vector3 direction = right * input.x + forward * input.y;
 
-        if (direction != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
+        // if (direction != Vector3.zero)
+        // {
+        //     Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+        //     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        // }
 
         return transform.position + direction * speed * Time.deltaTime;
     }
