@@ -8174,8 +8174,6 @@ MonoBehaviour:
   dropPlace: {fileID: 211141605}
   player: {fileID: 678398412}
   holdParent: {fileID: 1285660391}
-  pickSound: {fileID: 0}
-  putSound: {fileID: 0}
 --- !u!54 &935869345
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8828,8 +8826,6 @@ MonoBehaviour:
   dropPlace: {fileID: 1588544822}
   player: {fileID: 678398412}
   holdParent: {fileID: 1285660391}
-  pickSound: {fileID: 0}
-  putSound: {fileID: 0}
 --- !u!65 &1052910844
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15110,8 +15106,6 @@ MonoBehaviour:
   dropPlace: {fileID: 1373257906}
   player: {fileID: 678398412}
   holdParent: {fileID: 1285660391}
-  pickSound: {fileID: 0}
-  putSound: {fileID: 0}
 --- !u!23 &1716481166
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16138,8 +16132,6 @@ MonoBehaviour:
   dropPlace: {fileID: 1405346876}
   player: {fileID: 678398412}
   holdParent: {fileID: 1285660391}
-  pickSound: {fileID: 0}
-  putSound: {fileID: 0}
 --- !u!54 &1842749547
 Rigidbody:
   m_ObjectHideFlags: 0
