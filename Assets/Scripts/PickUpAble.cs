@@ -13,9 +13,14 @@ public class PickUpAble : MonoBehaviour
     private Controls _controls;
     public Transform holdParent;
 
+    private AudioSource pickSound;
+    private AudioSource putSound;
+
     private void Awake()
     {
         _controls = new Controls();
+        pickSound = GameObject.Find("pickSFX").GetComponent<AudioSource>();
+        putSound = GameObject.Find("putSFX").GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -53,6 +58,7 @@ public class PickUpAble : MonoBehaviour
                 {
                     PickupObject(this.transform.gameObject);
                     Debug.Log("GRAB");
+                    pickSound.Play();
                 }
             }
             else
@@ -102,6 +108,8 @@ public class PickUpAble : MonoBehaviour
             heldRig.freezeRotation = false;
 
             heldObject = null;
+
+            putSound.Play();
         }
 
     }

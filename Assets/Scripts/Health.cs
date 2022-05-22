@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    [SerializeField] private AudioSource hurtSound;
+
     private void Start()
     {
         PlayerPrefs.SetInt("health", health);
@@ -41,6 +43,7 @@ public class Health : MonoBehaviour
     public void minusHealth()
     {
         health -= 1;
+        hurtSound.Play();
         PlayerPrefs.SetInt("health", health);
     }
 
