@@ -8,6 +8,7 @@ public class ControlUI : MonoBehaviour
     // Start is called before the first frame update
     private Controls _controls;
     public GameObject ControlMenu;
+    public GameObject PauseMenu;
     public bool isPaused;
 
     private void Awake()
@@ -32,7 +33,16 @@ public class ControlUI : MonoBehaviour
     {
         Time.timeScale = 1f;
         ControlMenu.SetActive(false);
+        PauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void OpenControl(string menuScene)
+    {
+        Time.timeScale = 0f;
+        ControlMenu.SetActive(true);
+        PauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Update()
