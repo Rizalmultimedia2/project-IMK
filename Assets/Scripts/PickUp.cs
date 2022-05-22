@@ -11,6 +11,9 @@ public class PickUp : MonoBehaviour
     private Controls _controls;
     public Transform holdParent;
 
+    [SerializeField] private AudioSource pickSound;
+    [SerializeField] private AudioSource putSound;
+
     private void Awake()
     {
         _controls = new Controls();
@@ -37,6 +40,7 @@ public class PickUp : MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
                 {
                     PickupObject(hit.transform.gameObject);
+                    pickSound.Play();
                     Debug.Log("GRAB");
                 }
             }
@@ -87,6 +91,7 @@ public class PickUp : MonoBehaviour
             heldRig.freezeRotation = false;
 
             heldObject = null;
+            putSound.Play();
         }
 
     }
