@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     public Sprite emptyHeart;
 
     [SerializeField] private AudioSource hurtSound;
+    private bool isWait = false;
 
     private void Start()
     {
@@ -49,9 +50,11 @@ public class Health : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "Enemy")
+        if (col.gameObject.name == "Enemy" && !isWait)
         {
             minusHealth();
+            isWait = true;
+            Invoke("setWaitFalse", 2);
             indicator.SetActive(true);
             Invoke("turnOfIndicator", 2);
         }
@@ -60,5 +63,10 @@ public class Health : MonoBehaviour
     private void turnOfIndicator()
     {
         indicator.SetActive(false);
+    }
+
+    private void setWaitFalse()
+    {
+        isWait = false;
     }
 }
