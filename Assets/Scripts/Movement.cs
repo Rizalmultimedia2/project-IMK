@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private bool usePhysics = true;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private AudioSource walkSound;
+    [SerializeField] private AudioSource runningSound;
     float turnSmoothVelocity;
 
     private Camera _mainCamera;
@@ -132,6 +134,7 @@ public class Movement : MonoBehaviour
         {
             _animator.SetBool(IsWalking, true);
             Vector3 target = HandleInput(input, playerSpeed);
+            walkSound.Play();
             MovePhysics(target);
         }
         else
@@ -181,6 +184,7 @@ public class Movement : MonoBehaviour
         {
             _animator.SetBool(IsRunning, true);
             Vector3 target = HandleInput(input, playerSpeed + 1f);
+            runningSound.Play();
             MovePhysics(target);
         }
         else
