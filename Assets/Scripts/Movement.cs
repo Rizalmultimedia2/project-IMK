@@ -128,13 +128,25 @@ public class Movement : MonoBehaviour
             return;
         }
 
+        if (_animator.GetBool(IsWalking) && !_animator.GetBool(IsRunning) && walkSound.isPlaying == false)
+        {
+            Debug.Log(walkSound.isPlaying);
+            walkSound.Play();
+        }
+
+        if (_animator.GetBool(IsRunning) && runningSound.isPlaying == false)
+        {
+            Debug.Log(runningSound.isPlaying);
+            walkSound.Stop();
+            runningSound.Play();
+        }
+
         Vector2 input = _controls.Player.Move.ReadValue<Vector2>();
 
         if (_controls.Player.Move.IsPressed())
         {
             _animator.SetBool(IsWalking, true);
             Vector3 target = HandleInput(input, playerSpeed);
-            walkSound.Play();
             MovePhysics(target);
         }
         else
@@ -184,7 +196,6 @@ public class Movement : MonoBehaviour
         {
             _animator.SetBool(IsRunning, true);
             Vector3 target = HandleInput(input, playerSpeed + 1f);
-            runningSound.Play();
             MovePhysics(target);
         }
         else
